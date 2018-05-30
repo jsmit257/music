@@ -35,7 +35,6 @@ File.open('mpd.txt', 'r:iso-8859-1') do |file|
 								end
 							end
 						end
-						p "got a line: ", line
 						@album.tracks.create(:file => @filename, :name => @name)
 					end
 				rescue EndOfAlbum => e
