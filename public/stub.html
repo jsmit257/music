@@ -1,0 +1,46 @@
+<html>
+	<head>
+
+		<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+	<style type=text/css>
+
+	li > ul.collapsed > li {
+		display: none;
+	}
+
+	</style>
+
+	<script type=text/javascript>
+	$(document).on('click', function(e) {
+		$(e.target).toggleClass('collapsed');
+	});
+	</script>
+
+	</head>
+	<body>
+		<ul>
+			<li class=''>artist1
+				<ul>
+					<li>album1
+						<ul>
+							<li>track1</li>
+							<li>track2</li>
+							<li>track3</li>
+							<li>track4</li>
+						</ul>
+					</li>
+				</ul>
+				<ul>
+					<li>album2
+					</li>
+				</ul>
+				<ul>
+					<li>album3
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+
