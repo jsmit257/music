@@ -5,10 +5,15 @@
 
 	<style type=text/css>
 
-	li > ul.collapsed > li {
+	li.collapsed > ul {
 		display: none;
+		background-color: blue;
+		color: blue;
 	}
 
+	li.collapsed  {
+			background-color: blue;
+	}
 	</style>
 
 	<script type=text/javascript>
@@ -40,7 +45,26 @@
 					</li>
 				</ul>
 			</li>
+			<li class=''>artist1
+				<ul>
+					<li>album1
+						<ul>
+							<li>track1</li>
+							<li>track2</li>
+							<li>track3</li>
+							<li>track4</li>
+						</ul>
+					</li>
+				</ul>
+				<ul>
+					<li>album2
+					</li>
+				</ul>
+				<ul>
+					<li>album3
+					</li>
+				</ul>
+			</li>
 		</ul>
 	</body>
 </html>
-
