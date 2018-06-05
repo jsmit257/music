@@ -1,11 +1,14 @@
 class Api::V1::ArtistsController < ApplicationController
+	
 	before_action :set_artist, only: [:show]
 
 	# GET /artists
 	# GET /artists.json
 	def index
+		@artists = Artist.all
 		respond_to do |format|
-			format.json { render :json => Artist.all }
+			format.html
+			format.json { render :json => @artists }
 		end
 	end
 
@@ -14,6 +17,7 @@ class Api::V1::ArtistsController < ApplicationController
 	def show
 		respond_to do |format|
 #			format.tar
+			format.html
 			# we don't save anything about artists except their albums, and we already have an 
 			# /artists/:artist_id/albums => albums#index; we left this here for the hell of it
 			# but it's really the tar format that we care about
