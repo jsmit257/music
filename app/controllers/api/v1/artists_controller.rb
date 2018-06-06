@@ -1,6 +1,6 @@
 class Api::V1::ArtistsController < ApplicationController
 	
-	before_action :set_artist, only: [:show]
+	before_action :set_artist, only: [:show, :edit]
 
 	# GET /artists
 	# GET /artists.json
@@ -28,11 +28,12 @@ class Api::V1::ArtistsController < ApplicationController
 	# GET /artists/new
 	def new
 		raise 'operation not supported'
+		@artist = Artist.new
 	end
 
 	# GET /artists/1/edit
 	def edit
-		raise 'operation not supported'
+#		raise 'operation not supported'
 	end
 
 	# POST /artists

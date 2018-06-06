@@ -4,5 +4,6 @@
 # Mime::Type.register "text/richtext", :rtf
 #
 Mime::Type.register 'application/x-tar', :tar
-Mime::Type.register 'application/mpeg', :mp3
+Mime::Type.register 'application/mpeg',  :mp3
+Mime::Type.register 'application/ogg',   :ogg
 

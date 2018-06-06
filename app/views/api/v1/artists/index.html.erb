@@ -13,6 +13,7 @@
     <% @artists.each do |artist| %>
       <tr>
 		  <td><%= artist.name %></td>
+		  <td><%= link_to 'show', api_v1_artist_path(artist, :format => :html) %></td>
       </tr>
     <% end %>
   </tbody>

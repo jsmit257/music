@@ -5,13 +5,12 @@ class Api::V1::AlbumsController < ApplicationController
 	# GET /albums
 	# GET /albums.json
 	def index
+		@albums = Album
+			.joins(:artist)
+			.where(:artist_id => params[:artist_id]) 
 		respond_to do |format|
-			format.json do 
-				render :json => Album
-					.joins(:artist)
-					.where(:artist_id => params[:artist_id])
-					.to_json(:include => :tracks)
-			end
+			format.html
+			format.json { render :json => @albums .to_json(:include => :tracks) }
 		end
 	end
 

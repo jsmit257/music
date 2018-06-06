@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Albums</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @albums.each do |album| %>
+      <tr>
+		  <td><%= album.name %></td>
+		  <td><%= link_to 'Show', api_v1_artist_album_path(:id => album.id, :format => :html) %></td>
+		  <td><%= link_to 'Edit', edit_api_v1_artist_album_path(:id => album.id) %></td>
+		  <td><%= link_to 'Destroy', api_v1_artist_album_path(:id => album.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Album', new_api_v1_artist_album_path %>

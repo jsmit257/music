@@ -1,4 +1,4 @@
-<%= form_with(model: artist, local: true) do |form| %>
+<%= form_with(url: api_v1_artist_path(@artist), local: true) do |form| %>
   <% if artist.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
@@ -11,6 +11,18 @@
     </div>
   <% end %>
 
+  <table>
+	  <tr>
+		  <td>
+			  <label for=#name><%= @artist.name %></label>
+		  </td>
+	  <tr>
+	  </tr>
+		  <td>
+			  <input type=text value="<%= @artist.name %>">
+		  </td>
+	  </tr>
+  </table>
   <div class="actions">
     <%= form.submit %>
   </div>
