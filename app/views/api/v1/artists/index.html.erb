@@ -3,20 +3,20 @@
 <h1>Artists</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+	<thead>
+		<tr>
+			<th colspan="2"></th>
+		</tr>
+	</thead>
 
-  <tbody>
-    <% @artists.each do |artist| %>
-      <tr>
-		  <td><%= artist.name %></td>
-		  <td><%= link_to 'show', artist_path(artist) %></td>
-      </tr>
-    <% end %>
-  </tbody>
+	<tbody>
+		<% @artists.each do |artist| %>
+			<tr>
+				<td><%= artist.name %></td>
+				<td><%= link_to 'show', artist_path(artist) %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
 
 <br>

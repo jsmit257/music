@@ -3,22 +3,26 @@
 <h1>Albums</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
+	<thead>
+		<tr>
+			<th colspan="6"></th>
+		</tr>
+	</thead>
 
-  <tbody>
-    <% @albums.each do |album| %>
-      <tr>
-		  <td><%= album.name %></td>
-		  <td><%= link_to 'Show', album_path(album) %></td>
-		  <td><%= link_to 'Edit', edit_album_path(album) %></td>
-		  <td><%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+	<tbody>
+		<% @albums.each do |album| %>
+			<tr>
+				<td><%= album.name %></td>
+				<td><%= link_to 'Show', album_path(album) %></td>
+				<td><%= link_to 'Edit', edit_album_path(album) %></td>
+				<td>
+					<%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
+				<td><%= link_to 'Home', artists_path %></td>
+				<td><%= link_to 'Tracks', tracks_path(:album_id => album.id) %></td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
 
 <br>

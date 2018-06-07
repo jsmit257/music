@@ -3,7 +3,6 @@ class Api::V1::AlbumsController < ApplicationController
 	before_action :set_album, only: [:show, :edit, :update, :destroy]
 
 	def index
-		puts params
 		@albums = Album
 			.joins(:artist)
 			.where(:artist_id => params[:artist_id]) 
@@ -30,7 +29,6 @@ class Api::V1::AlbumsController < ApplicationController
 
 	def create
 		@album = Album.new(album_params)
-
 		respond_to do |format|
 			if @album.save
 				format.html { redirect_to @album, notice: 'Album was successfully created.' }
@@ -63,12 +61,10 @@ class Api::V1::AlbumsController < ApplicationController
 	end
 
 	private
-	# Use callbacks to share common setup or constraints between actions.
 	def set_album
 		@album = Album.find(params[:id])
 	end
 
-	# Never trust parameters from the scary internet, only allow the white list through.
 	def album_params
 		params.fetch(:album, {})
 	end

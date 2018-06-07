@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	namespace :api, :only => [:index, :show], :defaults => { :format => :html } do 
+	namespace :api, :only => [:index, :show], :defaults => { :format => :json } do 
 		namespace :v1 do
 			resources :artists do 
 				resources :albums do
