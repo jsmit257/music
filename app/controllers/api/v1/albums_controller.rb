@@ -1,10 +1,9 @@
 class Api::V1::AlbumsController < ApplicationController
 
-	before_action :set_album, only: [:show]
+	before_action :set_album, only: [:show, :edit, :update, :destroy]
 
-	# GET /albums
-	# GET /albums.json
 	def index
+		puts params
 		@albums = Album
 			.joins(:artist)
 			.where(:artist_id => params[:artist_id]) 
@@ -14,30 +13,22 @@ class Api::V1::AlbumsController < ApplicationController
 		end
 	end
 
-	# GET /albums/1
-	# GET /albums/1.json
 	def show
 		respond_to do |format| 
 #			format.tar
+			format.html
 			format.json { render :json => @album.to_json(:include => :tracks) }
 		end
 	end
 
-	# GET /albums/new
 	def new
-		raise 'operation not supported'
 		@album = Album.new
 	end
 
-	# GET /albums/1/edit
 	def edit
-		raise 'operation not supported'
 	end
 
-	# POST /albums
-	# POST /albums.json
 	def create
-		raise 'operation not supported'
 		@album = Album.new(album_params)
 
 		respond_to do |format|
@@ -51,10 +42,7 @@ class Api::V1::AlbumsController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /albums/1
-	# PATCH/PUT /albums/1.json
 	def update
-		raise 'operation not supported'
 		respond_to do |format|
 			if @album.update(album_params)
 				format.html { redirect_to @album, notice: 'Album was successfully updated.' }
@@ -66,10 +54,7 @@ class Api::V1::AlbumsController < ApplicationController
 		end
 	end
 
-	# DELETE /albums/1
-	# DELETE /albums/1.json
 	def destroy
-		raise 'operation not supported'
 		@album.destroy
 		respond_to do |format|
 			format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.' }

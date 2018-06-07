@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <%= @artist.name %>
-<%= link_to 'Edit', edit_api_v1_artist_path(@artist, :format => :html) %> |
-<%= link_to 'Back', api_v1_artists_path(:format => :html) %>
-<%= link_to 'Albums', api_v1_artist_albums_path(:artist_id => @artist.id, :format => :html) %>
+<%= link_to 'Edit', edit_artist_path %> |
+<%= link_to 'Home', artists_path %>
+<%= link_to 'Albums', albums_path(:artist_id => @artist.id) %>

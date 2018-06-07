@@ -2,5 +2,5 @@
 
 <%= render 'form', artist: @artist %>
 
-<%= link_to 'Show', api_v1_artist_path(@artist, :format => :html) %> |
-<%= link_to 'Back', api_v1_artists_path(:format => :html) %>
+<%= link_to 'Show', artist_path(@artist) %> |
+<%= link_to 'Home', artists_path %>

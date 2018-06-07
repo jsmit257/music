@@ -2,8 +2,6 @@ class Api::V1::ArtistsController < ApplicationController
 	
 	before_action :set_artist, only: [:show, :edit]
 
-	# GET /artists
-	# GET /artists.json
 	def index
 		@artists = Artist.all
 		respond_to do |format|
@@ -12,8 +10,6 @@ class Api::V1::ArtistsController < ApplicationController
 		end
 	end
 
-	# GET /artists/1
-	# GET /artists/1.json
 	def show
 		respond_to do |format|
 #			format.tar
@@ -25,19 +21,15 @@ class Api::V1::ArtistsController < ApplicationController
 		end
 	end
 
-	# GET /artists/new
 	def new
 		raise 'operation not supported'
 		@artist = Artist.new
 	end
 
-	# GET /artists/1/edit
 	def edit
 #		raise 'operation not supported'
 	end
 
-	# POST /artists
-	# POST /artists.json
 	def create
 		raise 'operation not supported'
 		@artist = Artist.new(artist_params)
@@ -53,8 +45,6 @@ class Api::V1::ArtistsController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /artists/1
-	# PATCH/PUT /artists/1.json
 	def update
 		raise 'operation not supported'
 		respond_to do |format|
@@ -68,8 +58,6 @@ class Api::V1::ArtistsController < ApplicationController
 		end
 	end
 
-	# DELETE /artists/1
-	# DELETE /artists/1.json
 	def destroy
 		raise 'operation not supported'
 		@artist.destroy

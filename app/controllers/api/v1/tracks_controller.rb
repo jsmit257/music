@@ -5,6 +5,7 @@ class Api::V1::TracksController < ApplicationController
 	# GET /tracks.json
 	def index
 		respond_to do |format|
+			format.html
 			format.json do 
 				render :json => Track
 					.joins(:album)
@@ -18,6 +19,7 @@ class Api::V1::TracksController < ApplicationController
 	# GET /tracks/1.json
 	def show
 		respond_to do |format| 
+			format.html
 			format.json { render :json => @track.to_json }
 		end
 	end
