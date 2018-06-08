@@ -8,13 +8,14 @@ class Api::V1::AlbumsController < ApplicationController
 			.where(:artist_id => params[:artist_id]) 
 		respond_to do |format|
 			format.html
-			format.json { render :json => @albums .to_json(:include => :tracks) }
+			format.json { render :json => @albums.to_json(:include => :tracks) }
 		end
 	end
 
 	def show
 		respond_to do |format| 
-#			format.tar
+#			format.tar { render :text => proc {}, :content_type => :tar }  # major limitation is content-disposition and filename
+			format.tar { send_data "", :filename => "", :type => :tar, :disposition => "attachment" }
 			format.html
 			format.json { render :json => @album.to_json(:include => :tracks) }
 		end
@@ -27,15 +28,14 @@ class Api::V1::AlbumsController < ApplicationController
 	def edit
 	end
 
+	# none of the below can render JSON, so respond_to might be unnecessary
 	def create
 		@album = Album.new(album_params)
 		respond_to do |format|
 			if @album.save
 				format.html { redirect_to @album, notice: 'Album was successfully created.' }
-				format.json { render :show, status: :created, location: @album }
 			else
 				format.html { render :new }
-				format.json { render json: @album.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -44,10 +44,8 @@ class Api::V1::AlbumsController < ApplicationController
 		respond_to do |format|
 			if @album.update(album_params)
 				format.html { redirect_to @album, notice: 'Album was successfully updated.' }
-				format.json { render :show, status: :ok, location: @album }
 			else
 				format.html { render :edit }
-				format.json { render json: @album.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -56,7 +54,6 @@ class Api::V1::AlbumsController < ApplicationController
 		@album.destroy
 		respond_to do |format|
 			format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.' }
-			format.json { head :no_content }
 		end
 	end
 

@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
-	namespace :api, :only => [:index, :show], :defaults => { :format => :json }, :constraints => { :format => :json } do 
+	namespace(
+		:api, 
+		:only => [:index, :show], 
+		:defaults => { :format => :json }, 
+		:constraints => { 
+			:format => [ :json, :tar, :mp3, :ogg ] 
+		} 
+	) do 
 		namespace :v1 do
 			resources :artists do 
 				resources :albums do

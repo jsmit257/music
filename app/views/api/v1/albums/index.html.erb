@@ -2,29 +2,19 @@
 
 <h1>Albums</h1>
 
-<table>
-	<thead>
-		<tr>
-			<th colspan="6"></th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @albums.each do |album| %>
-			<tr>
-				<td><%= album.name %></td>
-				<td><%= link_to 'Show', album_path(album) %></td>
-				<td><%= link_to 'Edit', edit_album_path(album) %></td>
-				<td>
-					<%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
-				<td><%= link_to 'Home', artists_path %></td>
-				<td><%= link_to 'Tracks', tracks_path(:album_id => album.id) %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
-<br>
+<ul>
+	<% @albums.each do |album| %>
+		<li>
+			<div class=listing><%= album.name %></div>
+			<div class="listing control"><%= link_to 'Show', album_path(album) %></div>
+			<div class="listing control"><%= link_to 'Edit', edit_album_path(album) %></div>
+			<div class="listing control">
+				<%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %>
+			</div>
+			<div class="listing control"><%= link_to 'Home', artists_path %></div>
+			<div class="listing control"><%= link_to 'Tracks', tracks_path(:album_id => album.id) %></div>
+		</li>
+	<% end %>
+</ul>
 
 <%= link_to 'New Album', new_album_path %>

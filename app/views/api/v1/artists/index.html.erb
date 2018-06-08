@@ -2,22 +2,12 @@
 
 <h1>Artists</h1>
 
-<table>
-	<thead>
-		<tr>
-			<th colspan="2"></th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<% @artists.each do |artist| %>
-			<tr>
-				<td><%= artist.name %></td>
-				<td><%= link_to 'show', artist_path(artist) %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-
-<br>
+<ul>
+	<% @artists.each do |artist| %>
+		<li>
+			<div class=listing><%= artist.name %></div>
+			<div class="listing control"><%= link_to 'show', artist_path(artist) %></div>
+		</li>
+	<% end %>
+</ul>
 
