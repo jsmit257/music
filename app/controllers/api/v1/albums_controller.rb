@@ -5,7 +5,7 @@ class Api::V1::AlbumsController < ApplicationController
 	def index
 		@albums = Album
 			.joins(:artist)
-			.where(:artist_id => params[:artist_id]) 
+			.where(:artist_id => params[:artist_id])
 		respond_to do |format|
 			format.html
 			format.json { render :json => @albums.to_json(:include => :tracks) }
@@ -13,9 +13,9 @@ class Api::V1::AlbumsController < ApplicationController
 	end
 
 	def show
-		respond_to do |format| 
+		respond_to do |format|
 #			format.tar { render :text => proc {}, :content_type => :tar }  # major limitation is content-disposition and filename
-			format.tar { send_data "", :filename => "", :type => :tar, :disposition => "attachment" }
+			#format.tar { send_data "", :filename => "", :type => :tar, :disposition => "attachment" }
 			format.html
 			format.json { render :json => @album.to_json(:include => :tracks) }
 		end
