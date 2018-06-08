@@ -1,0 +1,8 @@
+<h1>Editing Track</h1>
+
+<%= render 'form', track: @track %>
+
+<%= link_to 'Show', @track %> |
+<%= link_to 'Back', tracks_path(:album_id => @track.album.id) %> |
+<%= link_to 'Artists', artists_path %>
+

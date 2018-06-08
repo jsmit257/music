@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tracks</h1>
+
+<ul>
+	<% @tracks.each do |track| %>
+		<li>
+			<div class=listing><%= track.name %></div>
+			<div class="listing control"><%= link_to 'Show', track %></div>
+			<div class="listing control"><%= link_to 'Edit', edit_track_path(track) %></div>
+			<div class="listing control"><%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+		</li>
+	<% end %>
+</ul>
+
+<%= link_to 'New Track', new_track_path %>
+

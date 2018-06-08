@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Artists</h1>
+
+<ul>
+	<% @artists.each do |artist| %>
+		<li>
+			<div class="listing control"><%= link_to artist.name, artist_path(artist) %></div>
+		</li>
+	<% end %>
+</ul>
+
