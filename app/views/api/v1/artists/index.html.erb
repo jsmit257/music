@@ -5,8 +5,7 @@
 <ul>
 	<% @artists.each do |artist| %>
 		<li>
-			<div class=listing><%= artist.name %></div>
-			<div class="listing control"><%= link_to 'show', artist_path(artist) %></div>
+			<div class="listing control"><%= link_to artist.name, artist_path(artist) %></div>
 		</li>
 	<% end %>
 </ul>

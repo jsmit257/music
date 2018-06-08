@@ -2,5 +2,5 @@
 
 <%= @artist.name %>
 <%= link_to 'Edit', edit_artist_path %> |
-<%= link_to 'Home', artists_path %>
+<%= link_to 'Home', artists_path %> |
 <%= link_to 'Albums', albums_path(:artist_id => @artist.id) %>
