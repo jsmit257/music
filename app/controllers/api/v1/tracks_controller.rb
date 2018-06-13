@@ -8,8 +8,6 @@ class Api::V1::TracksController < ApplicationController
 			.where(:album_id => params[:album_id])
 		respond_to do |format|
 			format.html
-			format.ogg
-			format.mp3
 			format.json { render :json => @tracks.to_json }
 		end
 	end
@@ -18,6 +16,8 @@ class Api::V1::TracksController < ApplicationController
 		respond_to do |format| 
 			format.html
 			format.json { render :json => @track.to_json }
+			#format.mp3
+			#format.ogg
 		end
 	end
 
@@ -30,14 +30,11 @@ class Api::V1::TracksController < ApplicationController
 
 	def create
 		@track = Track.new(track_params)
-
 		respond_to do |format|
 			if @track.save
 				format.html { redirect_to @track, notice: 'Track was successfully created.' }
-				format.json { render :show, status: :created, location: @track }
 			else
 				format.html { render :new }
-				format.json { render json: @track.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -46,10 +43,8 @@ class Api::V1::TracksController < ApplicationController
 		respond_to do |format|
 			if @track.update(track_params)
 				format.html { redirect_to @track, notice: 'Track was successfully updated.' }
-				format.json { render :show, status: :ok, location: @track }
 			else
 				format.html { render :edit }
-				format.json { render json: @track.errors, status: :unprocessable_entity }
 			end
 		end
 	end
@@ -58,16 +53,18 @@ class Api::V1::TracksController < ApplicationController
 		@track.destroy
 		respond_to do |format|
 			format.html { redirect_to tracks_url, notice: 'Track was successfully destroyed.' }
-			format.json { head :no_content }
 		end
 	end
 
 	private
+
 	def set_track
 		@track = Track.find(params[:id])
 	end
 
 	def track_params
-		params.fetch(:track, {})
+		params.permit(:name, :file, :year, :genre)
 	end
+
 end
+

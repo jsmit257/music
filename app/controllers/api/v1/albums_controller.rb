@@ -63,6 +63,6 @@ class Api::V1::AlbumsController < ApplicationController
 	end
 
 	def album_params
-		params.fetch(:album, {})
+		params.permit(:name)
 	end
 end
