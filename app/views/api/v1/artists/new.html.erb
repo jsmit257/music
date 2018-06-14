@@ -1,3 +1,8 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'artists',     media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <h1>New Artist</h1>
 
 <%= render 'form', artist: @artist %>

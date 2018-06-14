@@ -1,11 +1,16 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'artists',     media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Artists</h1>
 
-<ul>
+<ul class=artists>
 	<% @artists.each do |artist| %>
-		<li>
-			<div class="listing control"><%= link_to artist.name, artist_path(artist) %></div>
+		<li class=collapsed>
+			<a class="listing contraol"><%= link_to artist.name, artist_path(artist) %></a>
 		</li>
 	<% end %>
 </ul>

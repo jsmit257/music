@@ -1,127 +1,15 @@
-<style>
-li > label, li > a {
-	display: inline;
-}
-li {
-	list-style-type: none;
-}
-li > a#root,
-li.collapsed > ul {
-	display: none;
-}
-</style>
-<ul>
-	<li class=collapsed>
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'artists',     media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'albums',      media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'tracks',      media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag '/js/music.js', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<ul class=pivot-root><%# something i learned from initrd %>
+	<li class='collapsed empty'>
 		<a data-get="/api/v1/artists" href=# id=root></a>
 	</li>
 </ul>
 <iframe id=dl-target></iframe>
-<script>
-'use strict';
-//(function() { 
-//
-//	const routes = [ 'artist', 'album', 'track' ];
-//
-//	// does every client script begin with IE hacks
-//	if (typeof [].prototype.forEach === 'undefined') { 
-//		[].prototype.forEach = function(callback, thisValue) {
-//			var i, j = this.length;
-//			for (i = 0; i < j; ++i) {
-//				if (typeof this[i] === 'undefined')
-//					continue;
-//				callback.call(thisValue, this[i], i, this);
-//			}
-//		};
-//	}
-//	if (typeof []prototype.map === 'undefined') { 
-//		[].prototype.map = function(callback, thisValue) { 
-//			var result = [];
-//			this.forEach( (element, ndx, list) => {
-//				// forEach already weeds out the undefineds
-//				result.push(callback.call(thisValue, element, ndx, list));
-//			}, this);
-//			return result;
-//		};
-//	}
-//	// FIXME: this implementation is read-only at best; applies to all IE <11
-//	if (typeof HTMLElement.prototype.dataset === 'undefined') { 
-//		HTMLElement.prototype.dataset = function() {
-//			var result = {};
-//			this.attributes().forEach( (attr) => {
-//				if (!attr.matches(/^data-/))
-//					return;
-//				result[  // longest key definition i've ever written
-//					attr
-//						.replace(/^data-/, '')
-//						.replace(/-+([^-])/, (_, w) => {
-//							return w.toUpperCase(); 
-//						})
-//				] = this.getAttribute(attr);
-//
-//			});
-//			return result;
-//		};
-//	}
-//
-//)();
-
-( (target) => {
-
-	const routes = [ 'artists', 'albums', 'tracks' ];
-
-	$(document).on('click', 'li > a[href="#"]', (e) => {
-		
-		e.preventDefault();
-
-		var $li = $(e.target.parentElement)
-			.toggleClass('collapsed');
-
-		if (e.target.parentElement.children.length === 4) // 4 == label + a.download + a.list + ul.dir
-			return;
-
-		var get = e.target.dataset.get;
-		var next = routes[routes.indexOf(get.split('/').pop()) + 1];
-
-		$.ajax({
-			url: get,
-			accept: 'application/json',
-//			context: args.root,
-			dataType: 'json',
-			method: 'GET',
-			error: (jqXhr, textStatus, errorThrown) => {
-				console.error(textStatus, errorThrown);
-			},
-			success: (data, textStatus, jqXhr) => {
-				$('<ul>')
-					.attr('data-get', get)
-					.append(data.map( (detail) => {
-						var href = get + '/' + detail.id;
-						var suffix = '.tar';
-						return $('<li>')
-							.addClass('collapsed')
-							.append($('<label>')
-								.text(detail.name))
-							.append($('<a>')
-								.text('list')
-								.attr({
-									'href': '#',
-									'data-get': href + '/' + next
-								}))
-							.append($('<a>')
-								.text('download')
-								.attr({
-									'href': href + suffix,
-									'target': '#dl-target'
-								}))
-					}))
-					.appendTo($li);
-			},
-		});
-
-	});
-
-	$(target).click();
-
-})(document.getElementById('root'));
-</script>
 

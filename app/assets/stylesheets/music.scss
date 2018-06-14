@@ -2,7 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-li > div.listing {
+li > label, li > a {
 	display: inline;
+}
+
+li {
+	list-style-type: none;
+}
+
+iframe,
+li > a#root,
+li.collapsed > ul {
+	display: none;
 }
 

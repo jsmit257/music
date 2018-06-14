@@ -1,18 +1,21 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'albums',      media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Albums</h1>
 
-<ul>
+<ul class=albums>
 	<% @albums.each do |album| %>
-		<li>
-			<div class=listing><%= album.name %></div> |
-			<div class="listing control"><%= link_to 'Show', album_path(album) %></div> |
-			<div class="listing control"><%= link_to 'Edit', edit_album_path(album) %></div> |
-			<div class="listing control">
-				<%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %>
-			</div> |
-			<div class="listing control"><%= link_to 'Home', artists_path %></div> |
-			<div class="listing control"><%= link_to 'Tracks', tracks_path(:album_id => album.id) %></div>
+		<li class=collapsed>
+			<a class=listing><%= album.name %></a> |
+			<%= link_to 'Show', album_path(album) %> |
+			<%= link_to 'Edit', edit_album_path(album) %></div> |
+			<%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %> |
+			<%= link_to 'Home', artists_path %> |
+			<%= link_to 'Tracks', tracks_path(:album_id => album.id) %>
 		</li>
 	<% end %>
 </ul>
