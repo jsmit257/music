@@ -33,7 +33,12 @@ Rails.application.routes.draw do
 		resources :tracks
 	end
 
-	get 'music/index'
+	get 'music', :to => 'music#index'
+	get 'search',
+		:to => 'search#index',
+		:only => [:index],
+		:defaults => { :format => :json},
+		:constraints => { :format => :json }
 
 end
 

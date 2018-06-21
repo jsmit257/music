@@ -5,14 +5,17 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1>Tracks</h1>
+<%# FIXME: artist_id is a problem here, and below; should come from the request %>
+<h1>
+	<a href=<%= albums_path(:artist_id => @album.artist_id)  %>><%= @album.name %></a>
+</h1>
 
-<ul class=tracks>
+<ul name=tracks id=/api/v1/artists/<%= @album.artist_id %>/albums/<%= params[:album_id] %>/tracks>
 	<% @tracks.each do |track| %>
-		<li class=collapsed>
-			<%= link_to track.name, track %> |
-			<%= link_to 'Edit', edit_track_path(track) %> |
-			<%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' } %> |
+		<li class='collapsed empty' id=<%= artist_path(track.album.artist_id) + album_path(track.album) + track_path(track)  %>>
+			<%= link_to track.name, track %>
+			<%= link_to 'Edit', edit_track_path(track) %>
+			<%= link_to 'Delete', track, method: :delete, data: { confirm: 'Are you sure?' } %>
 			<%= link_to 'Home', artists_path %>
 		</li>
 	<% end %>

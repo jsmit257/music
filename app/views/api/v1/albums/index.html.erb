@@ -7,17 +7,17 @@
 
 <h1>Albums</h1>
 
-<ul class=albums>
+<ul name=albums id=/api/v1/artists/<%= params[:artist_id] %>/albums>
 	<% @albums.each do |album| %>
-		<li class=collapsed>
-			<a class=listing><%= album.name %></a> |
-			<%= link_to 'Show', album_path(album) %> |
-			<%= link_to 'Edit', edit_album_path(album) %></div> |
-			<%= link_to 'Destroy', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %> |
-			<%= link_to 'Home', artists_path %> |
-			<%= link_to 'Tracks', tracks_path(:album_id => album.id) %>
+		<li class='collapsed empty' id=/api/v1<%= artist_path(album.artist_id) + album_path(album) %>>
+			<%= link_to album.name, tracks_path(:album_id => album.id), :class => [:testing, :foobar], :name => 'foobar' %>
+			<%= link_to 'Edit', edit_album_path(album) %></div>
+			<%= link_to 'Delete', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= link_to 'Download', album_path(album) + '.tar' %>
+			<%= link_to 'Home', artists_path %>
 		</li>
 	<% end %>
 </ul>
 
 <%= link_to 'New Album', new_album_path %>
+

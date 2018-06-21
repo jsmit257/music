@@ -14,7 +14,6 @@ class Api::V1::ArtistsController < ApplicationController
 		respond_to do |format|
 #			format.tar
 			format.html
-			format.json { render :json => @artist.to_json(:include => :albums) }
 		end
 	end
 
@@ -27,30 +26,24 @@ class Api::V1::ArtistsController < ApplicationController
 
 	def create
 		@artist = Artist.new(artist_params)
-		respond_to do |format|
-			if @artist.save
-				format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
-			else
-				format.html { render :new }
-			end
+		if @artist.save
+			redirect_to @artist, notice: 'Artist was successfully created.'
+		else
+			render :new
 		end
 	end
 
 	def update
-		respond_to do |format|
-			if @artist.update(artist_params)
-				format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
-			else
-				format.html { render :edit }
-			end
+		if @artist.update(artist_params)
+			redirect_to @artist, notice: 'Artist was successfully updated.'
+		else
+			render :edit
 		end
 	end
 
 	def destroy
 		@artist.destroy
-		respond_to do |format|
-			format.html { redirect_to artists_url, notice: 'Artist was successfully destroyed.' }
-		end
+		redirect_to artists_url, notice: 'Artist was successfully destroyed.'
 	end
 
 	private

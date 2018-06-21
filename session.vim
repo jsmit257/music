@@ -57,7 +57,6 @@ set shiftwidth=4
 set statusline=#\ %-2n\ %y\ %m\ %r\ %f%=0x%02.2B\ %7(%3c%-3V%)\ x\ %l/%L\ %P
 set tabstop=4
 set undofile
-set window=65
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -68,77 +67,71 @@ endif
 set shortmess=aoO
 badd +2 app/controllers/application_controller.rb
 badd +4 app/controllers/music_controller.rb
-badd +51 app/controllers/api/v1/albums_controller.rb
-badd +65 app/controllers/api/v1/artists_controller.rb
-badd +60 app/controllers/api/v1/tracks_controller.rb
-badd +2 app/views/music/index.html.erb
+badd +1 app/controllers/api/v1/albums_controller.rb
+badd +40 app/controllers/api/v1/artists_controller.rb
+badd +50 app/controllers/api/v1/tracks_controller.rb
+badd +13 app/views/music/index.html.erb
 badd +11 app/views/api/v1/albums/_form.html.erb
 badd +2 app/views/api/v1/albums/edit.html.erb
-badd +2 app/views/api/v1/albums/index.html.erb
+badd +10 app/views/api/v1/albums/index.html.erb
 badd +2 app/views/api/v1/albums/new.html.erb
 badd +5 app/views/api/v1/albums/show.html.erb
 badd +26 app/views/api/v1/artists/_form.html.erb
 badd +4 app/views/api/v1/artists/edit.html.erb
-badd +1 app/views/api/v1/artists/index.html.erb
+badd +10 app/views/api/v1/artists/index.html.erb
 badd +10 app/views/api/v1/artists/new.html.erb
 badd +6 app/views/api/v1/artists/show.html.erb
-badd +50 app/views/api/v1/tracks/_form.html.erb
+badd +21 app/views/api/v1/tracks/_form.html.erb
 badd +6 app/views/api/v1/tracks/edit.html.erb
-badd +17 app/views/api/v1/tracks/index.html.erb
+badd +13 app/views/api/v1/tracks/index.html.erb
 badd +1 app/views/api/v1/tracks/new.html.erb
 badd +5 app/views/api/v1/tracks/show.html.erb
-badd +39 config/routes.rb
+badd +37 config/routes.rb
 badd +1 config/application.rb
 badd +9 config/initializers/mime_types.rb
 badd +18 app/assets/stylesheets/music.scss
 badd +6 app/models/track.rb
 badd +81 app/assets/stylesheets/scaffolds.scss
-badd +29 app/views/layouts/application.html.erb
-badd +5 app/assets/javascripts/music.coffee
+badd +22 app/views/layouts/application.html.erb
 badd +16 app/assets/javascripts/application.js
 badd +14 config/initializers/assets.rb
+badd +12 public/js/music.js
+badd +25 app/controllers/search_controller.rb
+badd +29 public/js/search.js
+badd +3 public/js/delete.js
 argglobal
 silent! argdel *
 argadd app/controllers/application_controller.rb
-argadd app/controllers/music_controller.rb
-argadd app/controllers/api/v1/albums_controller.rb
-argadd app/controllers/api/v1/artists_controller.rb
-argadd app/controllers/api/v1/tracks_controller.rb
-argadd app/views/music/index.html.erb
-argadd app/views/api/v1/albums/_form.html.erb
-argadd app/views/api/v1/albums/edit.html.erb
-argadd app/views/api/v1/albums/index.html.erb
-argadd app/views/api/v1/albums/new.html.erb
-argadd app/views/api/v1/albums/show.html.erb
-argadd app/views/api/v1/artists/_form.html.erb
-argadd app/views/api/v1/artists/edit.html.erb
-argadd app/views/api/v1/artists/index.html.erb
-argadd app/views/api/v1/artists/new.html.erb
-argadd app/views/api/v1/artists/show.html.erb
-argadd app/views/api/v1/tracks/_form.html.erb
-argadd app/views/api/v1/tracks/edit.html.erb
-argadd app/views/api/v1/tracks/index.html.erb
-argadd app/views/api/v1/tracks/new.html.erb
-argadd app/views/api/v1/tracks/show.html.erb
-argadd config/routes.rb
 argadd config/application.rb
-edit app/views/api/v1/albums/show.html.erb
+argadd config/routes.rb
+argadd app/views/api/v1/tracks/show.html.erb
+argadd app/views/api/v1/tracks/new.html.erb
+argadd app/views/api/v1/tracks/index.html.erb
+argadd app/views/api/v1/tracks/edit.html.erb
+argadd app/views/api/v1/tracks/_form.html.erb
+argadd app/views/api/v1/artists/show.html.erb
+argadd app/views/api/v1/artists/new.html.erb
+argadd app/views/api/v1/artists/index.html.erb
+argadd app/views/api/v1/artists/edit.html.erb
+argadd app/views/api/v1/artists/_form.html.erb
+argadd app/views/api/v1/albums/show.html.erb
+argadd app/views/api/v1/albums/new.html.erb
+argadd app/views/api/v1/albums/index.html.erb
+argadd app/views/api/v1/albums/edit.html.erb
+argadd app/views/api/v1/albums/_form.html.erb
+argadd app/views/music/index.html.erb
+argadd app/controllers/api/v1/tracks_controller.rb
+argadd app/controllers/api/v1/artists_controller.rb
+argadd app/controllers/api/v1/albums_controller.rb
+argadd app/controllers/music_controller.rb
+edit public/js/search.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit app/views/api/v1/albums/show.html.erb
-nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
-nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+edit public/js/search.js
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -149,13 +142,13 @@ setlocal breakindentopt=
 setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,!^F,o,O,e,0]
 setlocal cinoptions=j1,J1
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=<%#%s%>
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=//%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -171,8 +164,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'eruby'
-setlocal filetype=eruby
+if &filetype != 'javascript'
+setlocal filetype=javascript
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -191,27 +184,27 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=0
-setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
-setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
-setlocal indentexpr=GetErubyIndent()
-setlocal indentkeys=o,O,*<Return>,<>>,{,},0),0],o,O,!^F,=end,=else,=elsif,=rescue,=ensure,=when
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=ri
+setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:],<:>
+setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=htmlcomplete#CompleteTags
-setlocal path=/usr/lib64/ruby/site_ruby/2.2.0,/usr/lib64/ruby/site_ruby/2.2.0/x86_64-linux,/usr/lib64/ruby/site_ruby,/usr/lib64/ruby/vendor_ruby/2.2.0,/usr/lib64/ruby/vendor_ruby/2.2.0/x86_64-linux,/usr/lib64/ruby/vendor_ruby,/usr/lib64/ruby/2.2.0,/usr/lib64/ruby/2.2.0/x86_64-linux
+setlocal omnifunc=javascriptcomplete#CompleteJS
+setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -229,15 +222,15 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
-setlocal suffixesadd=.rb
+setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'eruby'
-setlocal syntax=eruby
+if &syntax != 'javascript'
+setlocal syntax=javascript
 endif
 setlocal tabstop=4
 setlocal tagcase=
-setlocal tags=./tags,./TAGS,tags,TAGS,/usr/lib64/ruby/site_ruby/2.2.0/tags,/usr/lib64/ruby/site_ruby/2.2.0/x86_64-linux/tags,/usr/lib64/ruby/site_ruby/tags,/usr/lib64/ruby/vendor_ruby/2.2.0/tags,/usr/lib64/ruby/vendor_ruby/2.2.0/x86_64-linux/tags,/usr/lib64/ruby/vendor_ruby/tags,/usr/lib64/ruby/2.2.0/tags,/usr/lib64/ruby/2.2.0/x86_64-linux/tags
+setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal undofile
@@ -247,12 +240,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 32) / 64)
+let s:l = 41 - ((40 * winheight(0) + 43) / 87)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+41
+normal! 053|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

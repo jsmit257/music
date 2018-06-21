@@ -16,3 +16,22 @@ li.collapsed > ul {
 	display: none;
 }
 
+body.searching ul.artists > li,
+body.searching ul.albums > li {
+	display: none;
+}
+body.searching ul.artists > li.search-parent-found,
+body.searching ul.artists > li.search-found,
+body.searching ul.albums > li.search-parent-found,
+body.searching ul.albums > li.search-found {
+	display: initial !important;
+}
+
+li.search-parent-found {
+	background-color: #ffbb33;
+}
+
+li.search-found {
+	background-color: #ff8888;
+}
+
