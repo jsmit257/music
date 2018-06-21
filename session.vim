@@ -56,7 +56,9 @@ set runtimepath=~/.vim,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/v
 set shiftwidth=4
 set statusline=#\ %-2n\ %y\ %m\ %r\ %f%=0x%02.2B\ %7(%3c%-3V%)\ x\ %l/%L\ %P
 set tabstop=4
+set textwidth=104
 set undofile
+set window=88
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -70,7 +72,7 @@ badd +4 app/controllers/music_controller.rb
 badd +1 app/controllers/api/v1/albums_controller.rb
 badd +40 app/controllers/api/v1/artists_controller.rb
 badd +50 app/controllers/api/v1/tracks_controller.rb
-badd +13 app/views/music/index.html.erb
+badd +9 app/views/music/index.html.erb
 badd +11 app/views/api/v1/albums/_form.html.erb
 badd +2 app/views/api/v1/albums/edit.html.erb
 badd +10 app/views/api/v1/albums/index.html.erb
@@ -89,49 +91,49 @@ badd +5 app/views/api/v1/tracks/show.html.erb
 badd +37 config/routes.rb
 badd +1 config/application.rb
 badd +9 config/initializers/mime_types.rb
-badd +18 app/assets/stylesheets/music.scss
+badd +37 app/assets/stylesheets/music.scss
 badd +6 app/models/track.rb
 badd +81 app/assets/stylesheets/scaffolds.scss
-badd +22 app/views/layouts/application.html.erb
+badd +35 app/views/layouts/application.html.erb
 badd +16 app/assets/javascripts/application.js
 badd +14 config/initializers/assets.rb
-badd +12 public/js/music.js
-badd +25 app/controllers/search_controller.rb
-badd +29 public/js/search.js
+badd +38 public/js/music.js
+badd +56 app/controllers/search_controller.rb
+badd +45 public/js/search.js
 badd +3 public/js/delete.js
 argglobal
 silent! argdel *
 argadd app/controllers/application_controller.rb
-argadd config/application.rb
-argadd config/routes.rb
-argadd app/views/api/v1/tracks/show.html.erb
-argadd app/views/api/v1/tracks/new.html.erb
-argadd app/views/api/v1/tracks/index.html.erb
-argadd app/views/api/v1/tracks/edit.html.erb
-argadd app/views/api/v1/tracks/_form.html.erb
-argadd app/views/api/v1/artists/show.html.erb
-argadd app/views/api/v1/artists/new.html.erb
-argadd app/views/api/v1/artists/index.html.erb
-argadd app/views/api/v1/artists/edit.html.erb
-argadd app/views/api/v1/artists/_form.html.erb
-argadd app/views/api/v1/albums/show.html.erb
-argadd app/views/api/v1/albums/new.html.erb
-argadd app/views/api/v1/albums/index.html.erb
-argadd app/views/api/v1/albums/edit.html.erb
-argadd app/views/api/v1/albums/_form.html.erb
-argadd app/views/music/index.html.erb
-argadd app/controllers/api/v1/tracks_controller.rb
-argadd app/controllers/api/v1/artists_controller.rb
-argadd app/controllers/api/v1/albums_controller.rb
 argadd app/controllers/music_controller.rb
-edit public/js/search.js
+argadd app/controllers/api/v1/albums_controller.rb
+argadd app/controllers/api/v1/artists_controller.rb
+argadd app/controllers/api/v1/tracks_controller.rb
+argadd app/views/music/index.html.erb
+argadd app/views/api/v1/albums/_form.html.erb
+argadd app/views/api/v1/albums/edit.html.erb
+argadd app/views/api/v1/albums/index.html.erb
+argadd app/views/api/v1/albums/new.html.erb
+argadd app/views/api/v1/albums/show.html.erb
+argadd app/views/api/v1/artists/_form.html.erb
+argadd app/views/api/v1/artists/edit.html.erb
+argadd app/views/api/v1/artists/index.html.erb
+argadd app/views/api/v1/artists/new.html.erb
+argadd app/views/api/v1/artists/show.html.erb
+argadd app/views/api/v1/tracks/_form.html.erb
+argadd app/views/api/v1/tracks/edit.html.erb
+argadd app/views/api/v1/tracks/index.html.erb
+argadd app/views/api/v1/tracks/new.html.erb
+argadd app/views/api/v1/tracks/show.html.erb
+argadd config/routes.rb
+argadd config/application.rb
+edit public/js/music.js
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit public/js/search.js
+edit public/js/music.js
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -231,7 +233,7 @@ endif
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
-setlocal textwidth=0
+setlocal textwidth=104
 setlocal thesaurus=
 setlocal undofile
 setlocal undolevels=-123456
@@ -240,12 +242,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 41 - ((40 * winheight(0) + 43) / 87)
+let s:l = 69 - ((68 * winheight(0) + 43) / 87)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-41
-normal! 053|
+69
+normal! 013|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

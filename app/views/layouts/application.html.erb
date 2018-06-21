@@ -6,20 +6,26 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     
+	<%#
+	jQuery from CDN took almost 1s to load, now it's around 30ms
 	<script
 		src="https://code.jquery.com/jquery-2.2.4.min.js"   
   		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   
   		crossorigin="anonymous">
 	</script>
+	not as bad as jQuery, but this was taking 128ms to load, now it's also ~30ms
 	<script   
 		src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   
   		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   
 		crossorigin="anonymous">
 	</script>
+	 %>
+	<script src=/js/jquery-2.2.4.min.js></script>
+	<script src=/js/jquery-ui.min.js></script>
+	<script src=/js/music.js></script>
+	<script src=/js/search.js></script>
 
 	<%= yield :head %>
-
-	<script src=/js/search.js></script>
 
   </head>
   <body>

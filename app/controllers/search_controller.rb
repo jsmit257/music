@@ -9,7 +9,7 @@ class SearchController < ApplicationController
 	def byArtist
 		result = []
 		Artist
-			.where("name like '%#{@what}%'")
+			.where('name like ?', "%#{@what}%")
 			.each do |artist| 
 				result.push "/artists/#{artist.id}"
 			end
@@ -19,7 +19,7 @@ class SearchController < ApplicationController
 	def byAlbum
 		result = []
 		Album
-			.where("album.name like '%#{@what}%'")
+			.where('album.name like ?', "%#{@what}%")
 			.each do |album| 
 				result.push "/artists/#{album.artist_id}/albums/#{album.id}"
 			end
@@ -31,7 +31,7 @@ class SearchController < ApplicationController
 		Track
 			.eager_load(:album)
 			.joins(:album)
-			.where("track.name like '%#{@what}%'")
+			.where('track.name like ?', "%#{@what}%")
 			.each do |track| 
 				result.push "/artists/#{track.album.artist_id}/albums/#{track.album.id}/tracks/#{track.id}"
 			end

@@ -13,7 +13,7 @@
 <ul name=tracks id=/api/v1/artists/<%= @album.artist_id %>/albums/<%= params[:album_id] %>/tracks>
 	<% @tracks.each do |track| %>
 		<li class='collapsed empty' id=<%= artist_path(track.album.artist_id) + album_path(track.album) + track_path(track)  %>>
-			<%= link_to track.name, track %>
+			<%= link_to track.name, track, :class => [:label] %>
 			<%= link_to 'Edit', edit_track_path(track) %>
 			<%= link_to 'Delete', track, method: :delete, data: { confirm: 'Are you sure?' } %>
 			<%= link_to 'Home', artists_path %>
