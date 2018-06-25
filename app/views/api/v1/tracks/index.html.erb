@@ -1,0 +1,25 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'tracks',      media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<%# FIXME: artist_id is a problem here, and below; should come from the request %>
+<h1>
+	<a href=<%= albums_path(:artist_id => @album.artist_id)  %>><%= @album.name %></a>
+</h1>
+
+<ul name=tracks id=/api/v1/artists/<%= @album.artist_id %>/albums/<%= params[:album_id] %>/tracks>
+	<% @tracks.each do |track| %>
+		<li class='collapsed empty' id=<%= artist_path(track.album.artist_id) + album_path(track.album) + track_path(track)  %>>
+			<%= link_to track.name, track, :class => [:label] %>
+			<%= link_to 'Edit', edit_track_path(track) %>
+			<%= link_to 'Delete', track, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= link_to 'Home', artists_path %>
+		</li>
+	<% end %>
+</ul>
+
+<%= link_to 'New Track', new_track_path %>
+

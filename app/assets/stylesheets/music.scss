@@ -1,3 +1,37 @@
 // Place all the styles related to the Music controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+li > label, li > a {
+	display: inline;
+}
+
+li {
+	list-style-type: none;
+}
+
+iframe,
+li > a#root,
+li.collapsed > ul {
+	display: none;
+}
+
+body.searching ul.artists li {
+	display: none;
+}
+
+body.searching ul.artists  li.search-parent-found,
+body.searching ul.artists  li.search-found,
+body.searching ul.artists  li.search-parent-found li,
+body.searching ul.artists  li.search-found li {
+	display: block;
+}
+
+li.search-parent-found > a.label {
+	background-color: #ffbb33;
+}
+
+li.search-found > a.label {
+	background-color: #ff8888;
+}
+

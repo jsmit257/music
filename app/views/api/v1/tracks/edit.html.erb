@@ -1,0 +1,13 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'tracks',      media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<h1>Editing Track</h1>
+
+<%= render 'form', track: @track %>
+
+<%= link_to 'Show', @track %> |
+<%= link_to 'Back', tracks_path(:album_id => @track.album.id) %> |
+<%= link_to 'Artists', artists_path %>
+

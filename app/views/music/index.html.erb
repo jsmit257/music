@@ -1,2 +1,13 @@
-<h1>Music#index</h1>
-<p>Find me in app/views/music/index.html.erb</p>
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'artists',     media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'albums',      media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'tracks',      media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<ul class=pivot-root><%# something i learned from initrd %>
+	<li id=/api/v1/artists class='collapsed empty'>
+		<a data-get="/api/v1/artists" href=# id=root></a>
+	</li>
+</ul>
+

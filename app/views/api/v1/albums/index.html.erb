@@ -1,0 +1,23 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'albums',      media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Albums</h1>
+
+<ul name=albums id=/api/v1/artists/<%= params[:artist_id] %>/albums>
+	<% @albums.each do |album| %>
+		<li class='collapsed empty' id=/api/v1<%= artist_path(album.artist_id) + album_path(album) %>>
+			<%= link_to album.name, tracks_path(:album_id => album.id), :class => [:label], :name => 'foobar' %>
+			<%= link_to 'Edit', edit_album_path(album) %></div>
+			<%= link_to 'Delete', album_path(album), method: :delete, data: { confirm: 'Are you sure?' } %>
+			<%= link_to 'Download', album_path(album) + '.tar' %>
+			<%= link_to 'Home', artists_path %>
+		</li>
+	<% end %>
+</ul>
+
+<%= link_to 'New Album', new_album_path %>
+

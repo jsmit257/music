@@ -1,0 +1,29 @@
+create 
+ table  artist(
+        id integer not null primary key autoincrement
+       ,name varchar(512) not null unique
+        )
+;
+
+create 
+ table  album(
+        id integer not null primary key autoincrement
+       ,name varchar(4096) not null
+       ,artist_id integer not null references artist(id)
+       ,unique (artist_id, name)
+        )
+;
+
+create
+ table  track(
+        id integer not null primary key autoincrement
+       ,position int not null
+       ,name varchar(4096) not null
+       ,file varchar(4096) not null
+       ,date int not null default 0
+       ,genre varchar(64) not null default ''
+       ,album_id integer not null references album(id)
+       ,unique (album_id, position)
+        )
+;
+

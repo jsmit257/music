@@ -1,0 +1,11 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'artists',     media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<h1>Editing Artist</h1>
+
+<%= render 'form', artist: @artist %>
+
+<%= link_to 'Back', artist_path(@artist) %> |
+<%= link_to 'Artists', artists_path %>

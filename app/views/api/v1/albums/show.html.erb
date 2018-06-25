@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+
+<%= @album.name %> |
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', albums_path(:artist_id => @album.artist.id) %>

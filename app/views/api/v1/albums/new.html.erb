@@ -1,0 +1,10 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag    'music',       media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'albums',      media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<h1>New Album</h1>
+
+<%= render 'form', album: @album %>
+
+<%= link_to 'Back', albums_path %>
