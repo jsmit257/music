@@ -5,7 +5,6 @@ $((e) => {
 	const routes = [ 'artists', 'albums', 'tracks' ];
 	
 	var createList = ($li, get, klass, next) => { 
-//		console.log('createList', $li, get, klass, next)
 		var createDetail = (details) => {
 			return Object
 				.getOwnPropertyNames(details)
@@ -16,9 +15,8 @@ $((e) => {
 					var detail = details[key];
 					var href = get + '/' + detail.id;
 					var $existing = $(('#' + href).replace(/\//g, '\\/'));
-//					console.log($existing)
 					if ($existing.length) {
-						if ($existing.hasClass('collapsed'))
+						if ($existing.hasClass('collapsed') && detail.search_parent_found)
 							$existing.toggleClass('collapsed expanded touched-by-search')
 						return createList(
 								$existing

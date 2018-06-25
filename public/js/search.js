@@ -14,6 +14,7 @@ var search = (scope, what) => {
 		success: (data, textStatus, jqXhr) => {
 			clearSearch();
 			$(document.body).addClass('searching');
+			// if i still had a pivot-root, i could just pass all this stuff to it
 			Object
 				.getOwnPropertyNames(data)
 				.forEach((key, ndx, arr) => {
