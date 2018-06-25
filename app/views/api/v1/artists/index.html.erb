@@ -7,7 +7,7 @@
 
 <h1>Artists</h1>
 
-<ul name=artists id=/api/v1/artists>
+<ul class=artists id=/api/v1/artists>
 	<% @artists.each do |artist| %>
 		<li class='collapsed empty' id=/api/v1<%= artist_path(artist) %>>
 			<%= link_to artist.name, albums_path(:artist_id => artist.id), :class => [:label] %>
