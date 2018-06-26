@@ -21,7 +21,7 @@ var search = (scope, what) => {
 					var $li;
 					var klass = 'albums';  // depends on root having children
 					var next = routes[routes.indexOf(klass) + 1];
-					($li = $(('#/api/v1' + key).replace(/\//g, '\\/')))
+					($li = $('#' + key.replace(/\//g, '\\/')))
 						.addClass('search-parent-found')
 						.addClass(data[key].search_found && 'search-found')
 						.addClass('expanded touched-by-search')

@@ -11,7 +11,7 @@ class SearchController < ApplicationController
 		Artist
 		.where('name like ?', "%#{@what}%")
 		.each do |artist| 
-			result["/artists/#{artist.id}"] = artist.as_json.merge({ :search_found => true })
+			result["/api/v1/artists/#{artist.id}"] = artist.as_json.merge({ :search_found => true })
 		end
 
 		return result
@@ -25,7 +25,7 @@ class SearchController < ApplicationController
 		.joins(:artist => :albums)
 		.where('albums_artist.name like ?', "%#{@what}%")
 		.each do |album| 
-			artist_key = "/artists/#{album.artist.id}"
+			artist_key = "/api/v1/artists/#{album.artist.id}"
 			artist = (result[artist_key] or result[artist_key] = album.artist.as_json)
 			artist[:search_parent_found] = true
 			albums = (artist[:children] or artist[:children] = {})
@@ -45,7 +45,7 @@ class SearchController < ApplicationController
 		.where('tracks_album.name like ?', "%#{@what}%")
 		.each do |track|
 			search_found = !(/#{@what}/i =~ track.name).nil?
-			artist_key = "/artists/#{track.album.artist.id}"
+			artist_key = "/api/v1/artists/#{track.album.artist.id}"  # version should be dynamic
 			artist = (result[artist_key] or result[artist_key] = track.album.artist.as_json)
 			artist[:search_parent_found] = true
 			albums = (artist[:children] or artist[:children] = {})

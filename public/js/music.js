@@ -31,9 +31,9 @@ $((e) => {
 					var suffix = detail.format || '.tar';
 					var $result;
 					return ($result = $('<li>'))
-						.addClass(detail.search_parent_found && 'expanded search-parent-found' || 'collapsed')
+						.addClass(detail.search_parent_found && 'expanded search-parent-found touched-by-search' || 'collapsed')
 						.addClass(detail.search_found && 'search-found')
-						.addClass(!detail.children && 'empty' || 'touched-by-search')
+						.addClass(detail.children || 'empty')
 						.attr('id', href)
 						.append($('<a>')
 							.text(detail.name)
@@ -50,11 +50,14 @@ $((e) => {
 				});
 		};
 		return (data, textStatus, jqXhr) => {
-			$('<ul>')
-				.addClass(klass)
-				.attr('id', get)
-				.append(createDetail(data))
-				.appendTo($li);
+			var $ul = $('ul.' + klass, $li);
+			if (!$ul.length) {
+				$ul = $('<ul>')
+					.addClass(klass)
+					.attr('id', get)
+					.appendTo($li);
+			}
+			$ul.append(createDetail(data));
 		};
 	};
 
