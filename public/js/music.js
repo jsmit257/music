@@ -1,3 +1,6 @@
+/*
+ * © 2018 dsmith
+ */
 'use strict';
 
 $((e) => {
@@ -14,39 +17,32 @@ $((e) => {
 				.map((key, ndx, arr) => {
 					var detail = details[key];
 					var href = get + '/' + detail.id;
-					var $existing = $(('#' + href).replace(/\//g, '\\/'));
-					if ($existing.length) {
-						if ($existing.hasClass('collapsed') && detail.search_parent_found)
-							$existing.toggleClass('collapsed expanded touched-by-search')
-						return createList(
-								$existing
-									.addClass(detail.search_parent_found && 'search-parent-found')
-									.addClass(detail.search_found && 'search-found'), 
-								href + '/' + next, 
-								next, 
-								routes[routes.indexOf(next) + 1]
-							) // returns a function
-							(detail.children || {});
-					}
 					var suffix = detail.format || '.tar';
-					var $result;
-					return ($result = $('<li>'))
-						.addClass(detail.search_parent_found && 'expanded search-parent-found touched-by-search' || 'collapsed')
+					var $result = $(('#' + href).replace(/\//g, '\\/'));
+					if (!$result.length) { 
+						$result = $('<li>')
+							.addClass('collapsed')
+							.attr('id', href)
+							.append($('<a>')
+								.text(detail.name)
+								.attr('href', next && '#' || (href + suffix))
+								.attr(next && { 'data-get': href + '/' + next } || {})  // maybe use dataset
+								.addClass('label'))
+							.append($(next && '<a>')  // cliff notes: !tracks && download-link || nothing
+								.text('download')
+								.attr({
+									'href': href + suffix,
+									'target': '#dl-target'
+								}) || void(0));  // without void(0) it tries to reference an undefined node
+					}
+					$result
+						.addClass(detail.search_parent_found && 'search-parent-found')
 						.addClass(detail.search_found && 'search-found')
 						.addClass(detail.children || 'empty')
-						.attr('id', href)
-						.append($('<a>')
-							.text(detail.name)
-							.attr('href', next && '#' || (href + suffix))
-							.attr(next && { 'data-get': href + '/' + next } || {})  // maybe use dataset
-							.addClass('label'))
-						.append($(next && '<a>')  // cliff notes: !tracks && download-link || nothing
-							.text('download')
-							.attr({
-								'href': href + suffix,
-								'target': '#dl-target'
-							}) || void(0))  // without void(0) it tries to reference an undefined node
 						.append(createList($result, href + '/' + next, next, routes[routes.indexOf(next) + 1])(detail.children || {}));
+					if ($result.hasClass('collapsed search-parent-found'))
+						$result.toggleClass('collapsed expanded touched-by-search')
+					return $result;
 				});
 		};
 		return (data, textStatus, jqXhr) => {
@@ -67,11 +63,8 @@ $((e) => {
 	})
 	.on('click', 'li > a[href="#"]', (e, cb, openOnly) => {
 		e.preventDefault();
-		var $li = $(e.target.parentElement);
-		if ($li.hasClass('collapsed') || !openOnly)
-			$li.toggleClass('collapsed expanded');  // FIXME: expanded could be a problem
-		if ($li.hasClass('collapsed touched-by-search'))
-			$li.removeClass('touched-by-search')
+		$(e.target.parentElement)
+			.toggleClass('collapsed expanded');  // FIXME: expanded could be a problem
 	})
 	.on('click', 'li.empty > a[href="#"]', (e, cb, openOnly) => {
 		var $li = $(e.target.parentElement);

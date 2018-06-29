@@ -1,3 +1,8 @@
+/*
+ * © 2018 dsmith
+ */
+'use strict';
+
 $((e) => {
 	e.preventDefault();
 	const routes = ['artists', 'albums', 'tracks'];
