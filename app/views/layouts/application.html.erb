@@ -5,18 +5,18 @@
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
 	<%#
 	jQuery from CDN took almost 1s to load, now it's around 30ms
 	<script
-		src="https://code.jquery.com/jquery-2.2.4.min.js"   
-  		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   
+		src="https://code.jquery.com/jquery-2.2.4.min.js"
+  		integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   		crossorigin="anonymous">
 	</script>
 	not as bad as jQuery, but this was taking 128ms to load, now it's also ~30ms
-	<script   
-		src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   
-  		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   
+	<script
+		src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 		crossorigin="anonymous">
 	</script>
 	 %>
@@ -29,7 +29,21 @@
 
   </head>
   <body data-search-scope=<%= yield :body %>>
-    <%= yield %>
+    <div class=main>
+      <div class=header>
+        <div class=header-left>
+          <form name=search>
+          	<input name=what type=text>
+          	<input name=submit type=submit>
+          	<input name=reset type=reset>
+          </form>
+        </div>
+        <div class=header-center>
+        </div>
+        <div class=header-right>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
   </body>
 </html>
-
