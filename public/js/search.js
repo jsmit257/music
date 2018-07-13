@@ -1,59 +1,46 @@
-const routes = ['artists', 'albums', 'tracks'];
+/*
+ * © 2018 dsmith
+ */
+'use strict';
 
-var clearSearch = () => {
-	$('body.searching')
-		.removeClass('searching')
-		.find('.search-found, .search-parent-found')
+$((e) => { 
+	const routes = [ 'artists', 'albums', 'tracks' ];
+	const scope = document.body.dataset.searchScope;
+	$(document)
+	.on('reset', 'form[name="search"]', (e) => {
+		$('body.searching')
+			.removeClass('searching');
+		$('.search-found, .search-parent-found')
 			.removeClass('search-found search-parent-found');
-}
-
-var $selector = (key, depth) => { 
-	return $(('#/api/v1/' + key.match(new RegExp(routes.slice(0, depth).join('/\\d+/') + '/\\d+'))).replace(/\//g, '\\/'));
-};
-
-var search = (scope, what) => {
-	$.ajax({
-		url: '/search?scope=' + scope + '&what=' + what,
-		success: (data, textStatus, jqXhr) => {
-			clearSearch();
-			$(document.body).addClass('searching');
-			data
-				.sort((a, b) => {
-					return a.length -= b.length || a.localeCompare(b) 
-				})
-				.some((function doOver(slice) {
-					var node = '^/' + routes.slice(0, slice).join('/\\d+/') + '/\\d+$';
-					return (key, ndx, array) => { 
-						if (slice ==4) { console.log('dammit'); return true; }
-						if (!new RegExp(node).test(key)) {
-							array.slice(ndx).some(doOver(++slice));
-							return true;  // stop iterating
-						}
-						(function buildParents(depth, max) {
-							return () => { 
-								if (depth == max) {
-									$selector(key, depth).addClass('search-found');
-									return;
-								}
-								(function findRoot() {
-									var result = $selector(key, depth);
-									if (result.length)
-										return result;
-									++depth;   // this is the 'global' var
-									findRoot();
-								})()
-									.addClass('search-parent-found')
-									.find('a[href="#"]') 
-									.trigger('click', [buildParents(++depth, max), true]);
-							};
-						})(1, slice)();
-					}
-				})(1));
-		},
-		error: (jqXhr, textStatus, errorThrown) => {
-			console.log(textStatus, errorThrown);
-		}
+		$('.expanded.touched-by-search')
+			.toggleClass('expanded collapsed touched-by-search');
+	})
+	.on('submit', 'form[name="search"]', (e) => {
+		e.preventDefault();
+		$.ajax({
+			url: '/search?scope=' + scope + '&what=' + $('input[name="what"]', e.target).val(),
+			success: (data, textStatus, jqXhr) => {
+				$(e.target).trigger('resest')
+				$(document.body).addClass('searching');
+				// if i still had a pivot-root, i could just pass all this stuff to it
+				Object
+					.getOwnPropertyNames(data)
+					.forEach((key, ndx, arr) => {
+						var $li;
+						var klass = 'albums';  // depends on root having children
+						var next = routes[routes.indexOf(klass) + 1];
+						($li = $('#' + key.replace(/\//g, '\\/')))
+							.addClass('search-parent-found')
+							.addClass(data[key].search_found && 'search-found')
+							.addClass('expanded touched-by-search')
+							.removeClass('collapsed empty')
+							.find('a[href="#"]')
+								.trigger('child-data', [$li, key + '/' + klass, klass, next, data[key].children || {}]);
+					});
+			},
+			error: (jqXhr, textStatus, errorThrown) => {
+				console.log(textStatus, errorThrown);
+			}
+		});
 	});
-
-};
-
+})

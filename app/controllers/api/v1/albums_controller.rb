@@ -8,7 +8,7 @@ class Api::V1::AlbumsController < ApplicationController
 			.where(:artist_id => params[:artist_id]) 
 		respond_to do |format|
 			format.html
-			format.json { render :json => @albums.to_json(:include => :tracks) }
+			format.json { render :json => album }
 		end
 	end
 
@@ -58,5 +58,14 @@ class Api::V1::AlbumsController < ApplicationController
 	def album_params
 		params.permit(:name)
 	end
+
+	def album
+		result = {}
+		@albums.map do |album| 
+			result["/artists/#{album.artist.id}/albums/#{album.id}"] = album.as_json
+		end
+		result
+	end
+
 end
 

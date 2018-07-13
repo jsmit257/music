@@ -5,6 +5,14 @@
     <%= stylesheet_link_tag    'tracks',      media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
+<% content_for :body, 'all' %>
+
+<form name=search>
+	<input name=what type=text>
+	<input name=submit type=submit>
+	<input name=reset type=reset>
+</form>
+
 <ul class=pivot-root><%# something i learned from initrd %>
 	<li id=/api/v1/artists class='collapsed empty'>
 		<a data-get="/api/v1/artists" href=# id=root></a>

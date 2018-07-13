@@ -6,7 +6,7 @@ class Api::V1::ArtistsController < ApplicationController
 		@artists = Artist.all
 		respond_to do |format|
 			format.html
-			format.json { render :json => @artists }
+			format.json { render :json => artist }
 		end
 	end
 
@@ -54,5 +54,15 @@ class Api::V1::ArtistsController < ApplicationController
 	def artist_params
 		params.permit(:name)
 	end
+
+	def artist 
+		result = {}
+		@artists.map do |artist| 
+			# this is a symptom of search; wanat a uniform object model
+			result["/artists/#{artist.id}"] = artist.as_json
+		end
+		result
+	end
+
 end
 
