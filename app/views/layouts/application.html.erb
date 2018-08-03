@@ -28,14 +28,14 @@
 	<%= yield :head %>
 
   </head>
-  <body data-search-scope=<%= yield :body %>>
+  <body data-search-scope=<%= yield :body %> class=theme_A>
     <div class=main>
       <div class=header>
         <div class=header-left>
           <form name=search>
           	<input name=what type=text>
-          	<input name=submit type=submit>
-          	<input name=reset type=reset>
+          	<input name=submit type=submit value="">
+          	<input name=reset type=reset value="">
           </form>
         </div>
         <div class=header-center>
@@ -44,6 +44,14 @@
         </div>
       </div>
       <%= yield %>
+      <div class=footer>
+        <div class=footer-left>
+        </div>
+        <div class=footer-center>
+        </div>
+        <div class=footer-right>
+        </div>
+      </div>
     </div>
   </body>
 </html>

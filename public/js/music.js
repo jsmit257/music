@@ -1,17 +1,17 @@
 /*
- * © 2018 dsmith
+ * ï¿½ 2018 dsmith
  */
 'use strict';
 
 $((e) => {
 
 	const routes = [ 'artists', 'albums', 'tracks' ];
-	
-	var createList = ($li, get, klass, next) => { 
+
+	var createList = ($li, get, klass, next) => {
 		var createDetail = (details) => {
 			return Object
 				.getOwnPropertyNames(details)
-				.sort((a, b) => { 
+				.sort((a, b) => {
 					return details[a].name.localeCompare(details[b].name);
 				})
 				.map((key, ndx, arr) => {
@@ -19,7 +19,7 @@ $((e) => {
 					var href = get + '/' + detail.id;
 					var suffix = detail.format || '.tar';
 					var $result = $(('#' + href).replace(/\//g, '\\/'));
-					if (!$result.length) { 
+					if (!$result.length) {
 						$result = $('<li>')
 							.addClass('collapsed')
 							.attr('id', href)
@@ -87,14 +87,10 @@ $((e) => {
 			.then(cb || void(0));
 	})
 	.find('#root')
-		.trigger('click', () => { 
+		.trigger('click', () => {
+			$('ul.artists')
+				.insertBefore($('.pivot-root'));
 			$('.pivot-root')
-				.parent()
-				.append($('ul.artists'))
-				// not sure why the find is important, but pivotRoot.parent().append().remove(pivotRoot)
-				// throws an error
-				.find('.pivot-root')
-				.remove(); 
+				.remove();
 		});
 });
-

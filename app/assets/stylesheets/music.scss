@@ -1,7 +1,10 @@
 // Place all the styles related to the Music controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+li > a[href^='/api'] {
+	float: left;
+	margin-right: 1em;
+}
 li > label, li > a {
 	display: inline;
 }
@@ -16,6 +19,12 @@ li.collapsed > ul {
 	display: none;
 }
 
+body.theme_A {
+	background-image: url("/images/music_bkrnd.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
 body.searching ul.artists li {
 	display: none;
 }
@@ -27,27 +36,44 @@ body.searching ul.artists  li.search-found li {
 	display: block;
 }
 
-div.header > div {
+div.header > div,
+div.footer > div {
 	float: left;
-	height: 100px;
+	height: 80px;
+  border-radius: 10px;
+  margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 2%;
+  border-style:ridge;
+	border-color: white;
+}
+
+div.footer {
+	bottom: 0px;
+}
+
+div.header > div:first-child,
+div.footer > div:first-child {
+	margin-left: 2%;
 }
 
 div.header > div.header-left,
-div.header > div.header-right {
+div.header > div.header-right,
+div.footer > div.footer-left,
+div.footer > div.footer-right {
 	width: 25%;
 }
 
 div.header > div.header-left {
-	background-color: blue;
+
 }
 
-div.header > div.header-center {
-	background-color: pink;
-	width: 50%;
+div.header > div.header-center,
+div.footer > div.footer-center {
+	width: 36%;
 }
 
 div.header > div.header-right {
-	background-color: yellow;
 }
 
 li.search-parent-found > a.label {
@@ -57,3 +83,17 @@ li.search-parent-found > a.label {
 li.search-found > a.label {
 	background-color: #ff8888;
 }
+
+form[name='search'] > input[name='submit'],
+form[name='search'] > input[name='reset'] {
+	width: 30px;
+	height: 30px;
+}
+
+form[name='search'] > input[name='submit'] {
+	background-image: url("/images/small-pixel-icon-1.jpg");
+	background-position: -57px -466px;
+}
+form[name='search'] > input[name='reset'] {
+	background-image: url("/images/small-pixel-icon-1.jpg");
+	background-position: -57px -136px;}
