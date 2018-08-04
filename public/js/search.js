@@ -17,6 +17,7 @@ $((e) => {
 	})
 	.on('submit', 'form[name="search"]', (e) => {
 		e.preventDefault();
+		$(document.body).addClass('searching waiting');
 		$.ajax({
 			url: '/search?scope=' + scope + '&what=' + $('input[name="what"]', e.target).val(),
 			success: (data, textStatus, jqXhr) => {
@@ -41,6 +42,7 @@ $((e) => {
 			error: (jqXhr, textStatus, errorThrown) => {
 				console.log(textStatus, errorThrown);
 			}
-		});
+		})
+		.done((e) => { $(document.body).removeClass('waiting') });
 	});
 })
