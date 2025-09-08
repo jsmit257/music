@@ -12,21 +12,4 @@
 
 ActiveRecord::Schema.define(version: 2018_05_28_181248) do
 
-  create_table "album", force: :cascade do |t|
-    t.string "name", limit: 4096, null: false
-    t.integer "artist_id", null: false
-    t.index ["artist_id", "name"], name: "sqlite_autoindex_album_1", unique: true
-  end
-
-  create_table "artist", force: :cascade do |t|
-    t.string "name", limit: 512, null: false
-    t.index ["name"], name: "sqlite_autoindex_artist_1", unique: true
-  end
-
-  create_table "track", force: :cascade do |t|
-    t.string "name", limit: 4096, null: false
-    t.string "file", limit: 4096, null: false
-    t.integer "album_id", null: false
-  end
-
 end
