@@ -6,9 +6,8 @@
 $((e) => {
 
 	const routes = [ 'artists', 'albums', 'tracks' ];
-
-	var createList = ($li, get, klass, next) => {
-		var createDetail = (details) => {
+	var createList = ($li, get, klass, next) => { 
+		var createDetails = (details) => {
 			return Object
 				.getOwnPropertyNames(details)
 				.sort((a, b) => {
@@ -53,7 +52,7 @@ $((e) => {
 					.attr('id', get)
 					.appendTo($li);
 			}
-			$ul.append(createDetail(data));
+			$ul.append(createDetails(data));
 		};
 	};
 
@@ -71,20 +70,20 @@ $((e) => {
 		var get = e.target.dataset.get;
 		var klass = get.split('/').pop();
 		var next = routes[routes.indexOf(klass) + 1];
-		($li.prop('processing') && $li || $li.prop('processing', $.ajax({
-				url: get,
-				accept: 'application/json',
-				dataType: 'json',
-				method: 'GET'
-			})
-			.fail((jqXhr, textStatus, errorThrown) => {
-				console.log(textStatus, errorThrown);
-			})
-			.done(() => { $li.removeClass('empty').removeProp('processing') })
-			.then(createList($li, get, klass, next)))
-		 )  // returns a $li with guaranteed processing prop
-			.prop('processing')
-			.then(cb || void(0));
+		$.ajax({
+			url: get,
+			accept: 'application/json',
+			dataType: 'json',
+			method: 'GET'
+		})
+		.fail((jqXhr, textStatus, errorThrown) => {
+			console.log(textStatus, errorThrown);
+		})
+		.done(() => { 
+			$li.removeClass('empty').removeProp('processing') 
+		})
+		.then(createList($li, get, klass, next))
+		.then(cb || void(0));
 	})
 	.find('#root')
 		.trigger('click', () => {

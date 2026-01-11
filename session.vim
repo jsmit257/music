@@ -58,7 +58,6 @@ set statusline=#\ %-2n\ %y\ %m\ %r\ %f%=0x%02.2B\ %7(%3c%-3V%)\ x\ %l/%L\ %P
 set tabstop=4
 set textwidth=104
 set undofile
-set window=88
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -94,13 +93,15 @@ badd +9 config/initializers/mime_types.rb
 badd +37 app/assets/stylesheets/music.scss
 badd +6 app/models/track.rb
 badd +81 app/assets/stylesheets/scaffolds.scss
-badd +35 app/views/layouts/application.html.erb
+badd +19 app/views/layouts/application.html.erb
 badd +16 app/assets/javascripts/application.js
 badd +14 config/initializers/assets.rb
-badd +38 public/js/music.js
+badd +69 public/js/music.js
 badd +56 app/controllers/search_controller.rb
 badd +45 public/js/search.js
 badd +3 public/js/delete.js
+badd +1 app/views/music/_footer.html.erb
+badd +0 app/views/music/_header.html.erb
 argglobal
 silent! argdel *
 argadd app/controllers/application_controller.rb
@@ -126,14 +127,23 @@ argadd app/views/api/v1/tracks/new.html.erb
 argadd app/views/api/v1/tracks/show.html.erb
 argadd config/routes.rb
 argadd config/application.rb
-edit public/js/music.js
+edit app/views/music/_header.html.erb
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit public/js/music.js
+edit app/views/music/_header.html.erb
+nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
+nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -144,13 +154,13 @@ setlocal breakindentopt=
 setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,!^F,o,O,e,0]
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=j1,J1
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
+setlocal comments=:#
+setlocal commentstring=<%#%s%>
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -166,8 +176,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
+if &filetype != 'eruby'
+setlocal filetype=eruby
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -186,27 +196,27 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
+setlocal indentexpr=GetErubyIndent()
+setlocal indentkeys=o,O,*<Return>,<>>,{,},0),0],o,O,!^F,=end,=else,=elsif,=rescue,=ensure,=when
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
+setlocal keywordprg=ri
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
+setlocal matchpairs=(:),{:},[:],<:>
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
+setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal path=/usr/lib64/ruby/site_ruby/2.2.0,/usr/lib64/ruby/site_ruby/2.2.0/x86_64-linux,/usr/lib64/ruby/site_ruby,/usr/lib64/ruby/vendor_ruby/2.2.0,/usr/lib64/ruby/vendor_ruby/2.2.0/x86_64-linux,/usr/lib64/ruby/vendor_ruby,/usr/lib64/ruby/2.2.0,/usr/lib64/ruby/2.2.0/x86_64-linux
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -224,15 +234,15 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
-setlocal suffixesadd=
+setlocal suffixesadd=.rb
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
+if &syntax != 'eruby'
+setlocal syntax=eruby
 endif
 setlocal tabstop=4
 setlocal tagcase=
-setlocal tags=
+setlocal tags=./tags,./TAGS,tags,TAGS,/usr/lib64/ruby/site_ruby/2.2.0/tags,/usr/lib64/ruby/site_ruby/2.2.0/x86_64-linux/tags,/usr/lib64/ruby/site_ruby/tags,/usr/lib64/ruby/vendor_ruby/2.2.0/tags,/usr/lib64/ruby/vendor_ruby/2.2.0/x86_64-linux/tags,/usr/lib64/ruby/vendor_ruby/tags,/usr/lib64/ruby/2.2.0/tags,/usr/lib64/ruby/2.2.0/x86_64-linux/tags
 setlocal textwidth=104
 setlocal thesaurus=
 setlocal undofile
@@ -242,12 +252,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 69 - ((68 * winheight(0) + 43) / 87)
+let s:l = 1 - ((0 * winheight(0) + 32) / 64)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-69
-normal! 013|
+1
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
